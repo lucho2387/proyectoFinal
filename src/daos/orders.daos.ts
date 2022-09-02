@@ -1,17 +1,13 @@
-import mongoose from "mongoose";
 import { OrderModel } from "../models/order.model";
 import { OrderDto } from "../dtos/orders.dto";
-import { IOrder } from "../interfaces/orders.interfaces";
 import { CartModel } from "../models/carts.model";
 
 export class OrderDao {
-    constructor() {
- 
-    }
-
+    constructor() {}
+    
     async getByEmail(email: string): Promise<OrderDto[] | undefined> {
         try {
-            const order = await OrderModel.find({ email: email });
+            const order = await OrderModel.find({email})
             if (order) {
                 const orders = [];
                 order.forEach((o) => {

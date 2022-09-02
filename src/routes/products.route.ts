@@ -1,21 +1,21 @@
 import { Router } from "express";
 import { ProductosController } from "../controllers/products.controller";
-import { logMiddlware } from "../middlewares/log";
+import { isAdmin } from "../middlewares/isAdmin";
 
 const routerProducts = Router()
 const controller = new ProductosController();
 
 
-routerProducts.post("/", controller.createProduct);
+routerProducts.post("/", isAdmin, controller.createProduct);
 
 routerProducts.get("/", controller.getProducts);
 
 routerProducts.get('/:productId', controller.getProductById)
 
-routerProducts.put("/:productId", controller.updateProduct);
+routerProducts.put("/:productId", isAdmin, controller.updateProduct);
 
 routerProducts.get('/:categoria/productos', controller.getProductsCategory)
 
-routerProducts.delete('/:productId', controller.deleteProductById)
+routerProducts.delete('/:productId', isAdmin, controller.deleteProductById)
 
 export { routerProducts }

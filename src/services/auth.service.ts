@@ -2,6 +2,7 @@ import { IAuth } from "../interfaces/auth.interface"
 import { IUser } from "../interfaces/users.interface"
 import { UserModel } from "../models/users.model"
 import { encrypt, verified } from "../utils/bcrypt.handle"
+import { sendRegisterMail } from "../utils/messages"
 
 const registerNewUser = async ({ nombre, apellido, telefono, direccion,email, password } : IUser) => {
     const chcekIs = await UserModel.findOne({ email })
@@ -15,6 +16,7 @@ const registerNewUser = async ({ nombre, apellido, telefono, direccion,email, pa
         email, 
         password: passHash
     })
+    await sendRegisterMail(registerNewUser)
     return registerNewUser
 }   
 

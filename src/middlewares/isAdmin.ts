@@ -3,7 +3,7 @@ import { config } from "../config/config"
 
 export const isAdmin = (req: Request, res: Response, next: NextFunction) => {
     try {
-        if(config.ADMIN === "ADMIN") {
+        if(config.ADMIN === "admin") {
             return next()
         }
         res.json({mensaje: "No esta autorizado para acceder a la ruta."})

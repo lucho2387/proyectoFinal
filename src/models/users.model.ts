@@ -1,5 +1,4 @@
 import { Schema, model } from "mongoose";
-import { IProducto } from "../interfaces/products.interface";
 import { IUser } from "../interfaces/users.interface";
 
 const UserSchema = new Schema<IUser>(
@@ -10,15 +9,15 @@ const UserSchema = new Schema<IUser>(
         },
         apellido: {
             type: String, 
-            required: true
+            // required: true
         },
         telefono: {
             type: String, 
-            required: true
+            // required: true
         },
         direccion: {
             type: String, 
-            required: true
+            // required: true
         },
         email: {
             type: String, 

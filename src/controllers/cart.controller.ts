@@ -94,7 +94,7 @@ export class CartController {
             const { cartId } = req.params
             const cart = await service.deleteCartById(cartId)
             if(!cart) return res.json({mensaje: `El carrito con id:${cartId} no se encontro`})
-            res.json({ carrito: cart })
+            res.json({ carritoEliminado: cart })
         } catch (e) {
             handleHttp(res, 'Error no se pudo eliminar el Carrito')
         }

@@ -21,6 +21,11 @@ export class InfoDao {
                 email: config.EMAIL,
                 passemail: config.PASSEMAIL,
                 admin: config.ADMIN,
+                name_database: config.NAME_DATABASE,
+                node_env: config.NODE_ENV,
+                tipo_persistencia: config.TIPO_PERSISTENCIA,
+                name: config.NAME,
+                password: config.PASSWORD
             }
             return info
         } catch (e) {

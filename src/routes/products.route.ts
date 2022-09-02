@@ -15,7 +15,7 @@ routerProducts.get('/:productId', controller.getProductById)
 
 routerProducts.put("/:productId", isAdmin, checkJwt, controller.updateProduct);
 
-routerProducts.get('/:categoria/productos', checkJwt,controller.getProductsCategory)
+routerProducts.get('/:categoria/productos',controller.getProductsCategory)
 
 routerProducts.delete('/:productId', isAdmin, checkJwt, controller.deleteProductById)
 

@@ -10,5 +10,6 @@ export default {
     PASSWORD: process.env.PASSWORD,
     NAME_DATABASE: process.env.NAME_DATABASE,
     EMAIL: process.env.EMAIL,
-    PASSEMAIL: process.env.PASSEMAIL
+    PASSEMAIL: process.env.PASSEMAIL,
+    ADMIN: process.env.ADMIN,
 }

@@ -1,11 +1,9 @@
-// import { PreMiddlewareFunction } from "mongoose";
 import { CartDao } from "../daos/cart.daos";
 import { OrderDao } from "../daos/orders.daos";
 
 import { CartDto } from "../dtos/cart.dto";
 import { OrderDto } from "../dtos/orders.dto";
 import { ProductoDto } from "../dtos/products.dto";
-// import { config, logger } from "../utils";
 
 const cartDao = new CartDao();
 const orderDao = new OrderDao();

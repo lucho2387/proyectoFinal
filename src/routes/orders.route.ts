@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { OrdersController } from "../controllers/orders.controller";
+import { checkJwt } from "../middlewares/session";
 
 const routerOrders  = Router();
 const controller = new OrdersController();

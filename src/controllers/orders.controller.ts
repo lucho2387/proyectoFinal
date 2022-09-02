@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import { OrdersService } from "../services/orders.service";
-// import { logger, sendOrderMail } from "../utils";
-// import { logErr } from "../utils";
+import { sendOrderMail } from "../utils/messages";
 
 const service = new OrdersService();
 
@@ -9,8 +8,8 @@ export class OrdersController {
     async createOrder(req: Request, res: Response) {
         try {
             const email = req.body.email;
-            const orden = await service.createOrder(email);
-            // await sendOrderMail(orden);
+            const order = await service.createOrder(email);
+             await sendOrderMail(order);
             res.json({mensaje: "El pedido fue generado correctamente"})
         } catch (e) {
             // logErr.error(e);

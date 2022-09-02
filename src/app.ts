@@ -9,6 +9,7 @@ import { routerCart } from './routes/cart.route';
 import { routerOrders } from './routes/orders.route';
 import path from 'path'
 import { routerInfo } from './routes/info.route';
+import { routerUsers } from './routes/users.route';
 
 dbConnect().then()
 const app = express()
@@ -27,6 +28,7 @@ app.use('/api/auth', routerAuth)
 app.use('/api/carts', routerCart)
 app.use('/api/orders', routerOrders)
 app.use('/api/info', routerInfo)
+app.use('/api/users', routerUsers)
 
 //Static Files
 app.use(express.static(path.join(__dirname, 'public')));

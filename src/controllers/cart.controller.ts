@@ -52,12 +52,16 @@ export class CartController {
                 const saveProduct = await service.createCart(email, product);
                 res.json({productoGuardado: saveProduct})
             } else {
-                const cartId = cartExist._id
-                await service.updateCartById(cartId, product)
-                res.json({mensaje: `El producto con id:${productId} se agrego correctamente`})
+                try {
+                    const cartId = cartExist._id
+                    await service.updateCartById(cartId, product)
+                    res.json({mensaje: `El producto con id:${productId} se agrego correctamente`})
+                } catch (e) {
+                    handleHttp(res, 'Error no se pudo agregar el producto al Carrito')
+                }
             } 
         } catch (e) {
-            handleHttp(res, 'Error no se pudo obtener el Carrito')
+            handleHttp(res, 'Error no se pudo crear el Carrito')
         }
     }
   
@@ -81,7 +85,7 @@ export class CartController {
                 }
             }
         } catch (e) {
-            handleHttp(res, 'Error no se pudo actualizar el Carrito')
+            handleHttp(res, 'Error no se pudo eliminar el producto del Carrito')
         }
     }
 

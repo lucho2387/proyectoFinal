@@ -5,6 +5,7 @@ const routerOrders  = Router();
 const controller = new OrdersController();
 
 routerOrders.post("/", controller.createOrder);
+routerOrders.get("/", checkJwt, controller.getOrders);
 
 
 export { routerOrders };

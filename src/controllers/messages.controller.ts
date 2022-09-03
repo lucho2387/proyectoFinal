@@ -5,13 +5,6 @@ import { handleHttp } from "../utils/error.handle";
 
 const service = new MessagesService();
 
-// io.on("connection", async (socket) => {
-//     socket.on("mensajeEnviado", async (mensaje) => {
-//         await mensajesService.add(mensaje);
-//         io.sockets.emit("chatRefresh", mensaje);
-//     });
-// });
-
 export class MessagesController {
 
     async getMessages(req: Request, res: Response) {

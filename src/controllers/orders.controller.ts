@@ -18,14 +18,25 @@ export class OrdersController {
         }
     }
     
-    async getOrders(req: RequestExt, res: Response) {
+     async getOrdersEmail(req: RequestExt, res: Response) {
         try {
             const email = req.user.id  
-            const orders = await service.getOrders(email) 
+            const orders = await service.getOrdersEmail(email) 
             if(!orders) return res.json({ mensaje: "El usuario no tiene pedidos"})
             res.json({pedido: orders})
         } catch (e) {
-            handleHttp(res, "Error no se pudo obtener las Ordenes de compra")
+            handleHttp(res, "Error no se puede obtener las ordenes")
+        }
+    }
+    
+    async getOrders(req: RequestExt, res: Response) {
+        try {
+    
+            const order = await service.getOrders() 
+            if(!order) return res.json({ mensaje: `No se encontro la lista de ordenes`})
+            res.json({pedido: order})
+        } catch (e) {
+            handleHttp(res, "Error lista de ordenes no encontrada")
         }
     }
 }

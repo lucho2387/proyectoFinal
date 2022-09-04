@@ -5,7 +5,7 @@ import { CartModel } from "../models/carts.model";
 export class OrderDao {
     constructor() {}
     
-    async getByEmail(email: string): Promise<OrderDto[] | undefined> {
+    async getOrdersEmail(email: string): Promise<OrderDto[] | undefined> {
         try {
             const order = await OrderModel.find({email})
             if (order) {
@@ -20,14 +20,14 @@ export class OrderDao {
         }
     }
     
-    async getAll() {
+    async getOrders() {
         try {
-            return await OrderModel.find({}, { _id: 0, __v: 0 });
+            return await OrderModel.find();
         } catch (e) {
-            return e;
+            return e
         }
     }
-
+    
     async createOrder(orden: OrderDto) {
         try {
             const data = new OrderModel(orden);
@@ -37,11 +37,5 @@ export class OrderDao {
         }
     }
 
-    async deleteByEmail(cartId: string) {
-        try {
-            return await CartModel.deleteOne({ _id: cartId });
-        } catch (e) {
-            return e;
-        }
-    }
+    
 }

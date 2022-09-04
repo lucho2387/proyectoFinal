@@ -12,7 +12,7 @@ export class OrdersService {
             const cart = await cartDao.getCartByEmail(email);
             const d = new Date();
             const fecha = moment().format("DD/MM/YYYY --- HH:mm:ss A")
-            let ordenId = 1;
+            const ordenId = 1;
             const orders = await orderDao.getAll();
             if (orders && orders.length >= 1) {
                 ordenId = orders[orders.length - 1].ordenId + 1;

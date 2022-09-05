@@ -12,9 +12,9 @@ routerCart.get('/:cartId', isAdmin, controller.getCartById)
 
 routerCart.get('/users/:email', checkJwt, controller.getCartByEmail)
 
-routerCart.post('/:productId', checkJwt, controller.createCart)
+routerCart.post('/:productId/productos', checkJwt, controller.createCart)
 
-routerCart.delete('/:cartId/productos/:productId', checkJwt, controller.deleteProductCartById)
+routerCart.delete('/:productId/productos', checkJwt, controller.deleteProductCartById)
 
 routerCart.delete('/:cartId', isAdmin, checkJwt, controller.deleteCartById)
 

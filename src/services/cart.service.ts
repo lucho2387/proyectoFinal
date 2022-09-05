@@ -1,6 +1,5 @@
 import { ProductosDao } from "../daos/products.daos";
 import { CartDao } from "../daos/cart.daos";
-import { CartDto } from "../dtos/cart.dto";
 import { ProductoDto } from "../dtos/products.dto";
 
 

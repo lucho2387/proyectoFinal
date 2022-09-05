@@ -48,29 +48,21 @@ export class CartController {
             const product = await serviceProduct.getProductById(productId)
             
             const cartExist = await service.getCartByEmail(email);
-            // const index = cartExist.productos.findIndex(item => item.id === productId)
             if (!cartExist){
-                // if(index == -1){
-                    // const productCant = { producto: product, cantidad: 1 };
-                    // cartExist.productos.push(productCant);
                     if(!product){
                         res.json({mensaje: "No se encontro el producto"})
                     } else {
                         const saveProduct = await service.createCart(email, product);
                         res.json({productoGuardado: saveProduct})
                     }
-                // }
             } else {
-                // if(index != -1){
                     if(!product){
                         res.json({mensaje: "No se encontro el producto"})
                     } else {
                         const cartId = cartExist._id
-                        // cartExist.productos[index].cantidad = cartExist.productos[index].cantidad + 1;
                         await service.updateCartById(cartId, product)
                         res.json({mensaje: `El producto con id:${productId} se agrego correctamente`})
                     }  
-                // }
             } 
         } catch (e) {
             handleHttp(res, 'Error no se pudo obtener el Carrito')

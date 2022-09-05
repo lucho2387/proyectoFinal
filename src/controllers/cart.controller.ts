@@ -46,42 +46,53 @@ export class CartController {
             const { productId } = req.params
             const { email }  = req.body
             const product = await serviceProduct.getProductById(productId)
-            if(!product) res.json({mensaje: "No se encontro el producto"})
+            
             const cartExist = await service.getCartByEmail(email);
+            // const index = cartExist.productos.findIndex(item => item.id === productId)
             if (!cartExist){
-                const saveProduct = await service.createCart(email, product);
-                res.json({productoGuardado: saveProduct})
+                // if(index == -1){
+                    // const productCant = { producto: product, cantidad: 1 };
+                    // cartExist.productos.push(productCant);
+                    if(!product){
+                        res.json({mensaje: "No se encontro el producto"})
+                    } else {
+                        const saveProduct = await service.createCart(email, product);
+                        res.json({productoGuardado: saveProduct})
+                    }
+                // }
             } else {
-                try {
-                    const cartId = cartExist._id
-                    await service.updateCartById(cartId, product)
-                    res.json({mensaje: `El producto con id:${productId} se agrego correctamente`})
-                } catch (e) {
-                    handleHttp(res, 'Error no se pudo agregar el producto al Carrito')
-                }
+                // if(index != -1){
+                    if(!product){
+                        res.json({mensaje: "No se encontro el producto"})
+                    } else {
+                        const cartId = cartExist._id
+                        // cartExist.productos[index].cantidad = cartExist.productos[index].cantidad + 1;
+                        await service.updateCartById(cartId, product)
+                        res.json({mensaje: `El producto con id:${productId} se agrego correctamente`})
+                    }  
+                // }
             } 
         } catch (e) {
-            handleHttp(res, 'Error no se pudo crear el Carrito')
+            handleHttp(res, 'Error no se pudo obtener el Carrito')
         }
     }
-  
+
+
     async deleteProductCartById(req: Request, res: Response) {
         try {
             const { productId } = req.params
             const { email } = req.body
+            const product = await serviceProduct.getProductById(productId)
             const cartExist = await service.getCartByEmail(email);
-            if(!cartExist){
+            if (!cartExist){
                 res.json({mensaje: "No se encontro el carrito"})
             }else {
-                const product = await serviceProduct.getProductById(productId)
-                if(!product){
+                if(!product) {
                     res.json({mensaje: "No se encontro el producto"})
-                } else {
+                }else {
                     const cartId = cartExist._id
                     const cartProduct = await service.deleteProductCartById(cartId, product);
-                    res.json({
-                        productoEliminado: cartProduct
-                    })
+                    res.json({mensaje: `El producto con id:${productId} se elimino correctamente`})
                 }
             }
         } catch (e) {
@@ -94,7 +105,7 @@ export class CartController {
             const { cartId } = req.params
             const cart = await service.deleteCartById(cartId)
             if(!cart) return res.json({mensaje: `El carrito con id:${cartId} no se encontro`})
-            res.json({ carritoEliminado: cart })
+            res.status(200).json({mensaje: "El carrito fue eliminado correctamente"})
         } catch (e) {
             handleHttp(res, 'Error no se pudo eliminar el Carrito')
         }

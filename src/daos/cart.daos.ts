@@ -50,7 +50,7 @@ export class CartDao {
 
     async deleteProductCartById(cartId: string, product: ProductoDto) {
         try {
-            return await CartModel.findByIdAndDelete({_id: cartId}, {$pull: {productos: product}})
+            return await CartModel.updateOne({_id: cartId}, {$pull: {productos: product}})
         } catch (e) {
             return e;
         }

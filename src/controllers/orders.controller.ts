@@ -18,12 +18,16 @@ export class OrdersController {
         }
     }
     
-     async getOrdersEmail(req: Request, res: Response) {
+    async getOrdersEmail(req: RequestExt, res: Response) {
         try {
-            const email = req.user.id  
+            const { email } = req.params 
+            // const email = req.user.id  
             const orders = await service.getOrdersEmail(email) 
-            if(!orders) return res.json({ mensaje: "El usuario no tiene pedidos"})
-            res.json({pedido: orders})
+            if(!orders){
+                return res.json({ mensaje: "El usuario no tiene pedidos"})
+            } else {
+                res.json({pedido: orders})
+            }
         } catch (e) {
             handleHttp(res, "Error no se puede obtener las ordenes")
         }
@@ -31,10 +35,8 @@ export class OrdersController {
     
     async getOrders(req: Request, res: Response) {
         try {
-    
-            const order = await service.getOrders() 
-            if(!order) return res.json({ mensaje: `No se encontro la lista de ordenes`})
-            res.json({pedido: order})
+            const orders = await service.getOrders() 
+            res.json({pedidos: orders})
         } catch (e) {
             handleHttp(res, "Error lista de ordenes no encontrada")
         }

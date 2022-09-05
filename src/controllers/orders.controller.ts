@@ -20,8 +20,7 @@ export class OrdersController {
     
     async getOrdersEmail(req: RequestExt, res: Response) {
         try {
-            const { email } = req.params 
-            // const email = req.user.id  
+            const { email } = req.params  
             const orders = await service.getOrdersEmail(email) 
             if(!orders){
                 return res.json({ mensaje: "El usuario no tiene pedidos"})

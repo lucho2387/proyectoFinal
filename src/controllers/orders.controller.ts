@@ -7,9 +7,9 @@ import { RequestExt } from "../interfaces/req-ext";
 const service = new OrdersService();
 
 export class OrdersController {
-    async createOrder(req: Request, res: Response) {
+    async createOrder(req: RequestExt, res: Response) {
         try {
-            const email = req.body.email;
+            const email = req.user.id  
             const order = await service.createOrder(email);
              await sendOrderMail(order);
             res.json({mensaje: "El pedido fue generado correctamente"})
@@ -18,7 +18,7 @@ export class OrdersController {
         }
     }
     
-     async getOrdersEmail(req: RequestExt, res: Response) {
+     async getOrdersEmail(req: Request, res: Response) {
         try {
             const email = req.user.id  
             const orders = await service.getOrdersEmail(email) 
@@ -29,7 +29,7 @@ export class OrdersController {
         }
     }
     
-    async getOrders(req: RequestExt, res: Response) {
+    async getOrders(req: Request, res: Response) {
         try {
     
             const order = await service.getOrders() 

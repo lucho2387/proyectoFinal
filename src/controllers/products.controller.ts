@@ -6,14 +6,19 @@ import { handleHttp } from "../utils/error.handle";
 const service = new ProductosService();
 
 export class ProductosController {
+ 
+
     async getProducts(req: Request, res: Response) {
         try {
-            const products = await service.getProducts()
-            res.json(products)
+            const { productId } = req.params
+            const products = await service.getProducts(productId)
+            if(!products) return res.json({mensaje: `El producto con id:${productId} no fue encontrado`})
+            res.json({productos: products})
         } catch (e) {
-            handleHttp(res, 'Error no se pudo obtener la lista de Productos')
+            handleHttp(res, `Error no se pudo obtener el producto`)
         }
     }
+    
 
     async getProductsCategory(req: Request, res: Response) {
         try {
@@ -22,31 +27,6 @@ export class ProductosController {
             res.json({productosPorCtegoria: products})
         } catch (e) {
             handleHttp(res, `Error no se pudo obtener los productos`)
-        }
-    }
-
-    async getProductById(req: Request, res: Response) {
-        try {
-            const { productId } = req.params
-            const products = await service.getProductById(productId)
-            if(!products) return res.json({mensaje: `El producto con id:${productId} no fue encontrado`})
-            res.json({producto: products})
-        } catch (e) {
-            handleHttp(res, `Error no se pudo obtener el producto`)
-        }
-    }
-    
-
-    async deleteProductById(req: Request, res: Response) {
-        try {
-            const { productId } = req.params
-            const deleteProduct = await service.deleteProductById(productId)
-            res.json({
-                productoEliminado: deleteProduct, 
-                mensaje: "El producto se elimino correctamente"
-            });
-        } catch (e) {
-            handleHttp(res, `Error no se pudo eliminar el producto`)
         }
     }
 
@@ -74,6 +54,20 @@ export class ProductosController {
             })
         } catch (e) {
             handleHttp(res, `Error no se pudo actualizar el producto`)
+        }
+    }
+    
+
+    async deleteProductById(req: Request, res: Response) {
+        try {
+            const { productId } = req.params
+            const deleteProduct = await service.deleteProductById(productId)
+            res.json({
+                productoEliminado: deleteProduct, 
+                mensaje: "El producto se elimino correctamente"
+            });
+        } catch (e) {
+            handleHttp(res, `Error no se pudo eliminar el producto`)
         }
     }
 }

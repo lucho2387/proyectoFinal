@@ -7,9 +7,17 @@ export class ProductosDao {
 
     constructor() {}
  
-    async getProducts() {
+
+    async getProducts(productId: string) {
         try {
-            return await ProductoModel.find();
+            if(productId) {
+                const product = await ProductoModel.findOne({_id: productId})
+                return product
+            }
+            else {
+                const products = await ProductoModel.find()
+                return products
+            }
         } catch (e) {
             return e
         }
@@ -17,23 +25,6 @@ export class ProductosDao {
     async getProductsCategory(categoria: string) {
         try {
             return await ProductoModel.find({categoria})
-        } catch (e) {
-            return e
-        }
-    }
-
-    async getProductById(productId: string) {
-        try {
-            return await ProductoModel.findById(productId);
-        } catch (e) {
-            return e
-        }
-    }
-
-    async deleteProductById(productId: string) {
-        try {
-            const deleteProduct = await ProductoModel.findByIdAndDelete(productId)
-            return deleteProduct
         } catch (e) {
             return e
         }
@@ -55,5 +46,14 @@ export class ProductosDao {
             return e;
         }
     }
-   
+
+
+    async deleteProductById(productId: string) {
+        try {
+            const deleteProduct = await ProductoModel.findByIdAndDelete(productId)
+            return deleteProduct
+        } catch (e) {
+            return e
+        }
+    }   
 }

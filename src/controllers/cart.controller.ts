@@ -45,7 +45,7 @@ export class CartController {
         try {
             const { productId } = req.params
             const { email }  = req.body
-            const product = await serviceProduct.getProductById(productId)
+            const product = await serviceProduct.getProducts(productId)
             
             const cartExist = await service.getCartByEmail(email);
             if (!cartExist){
@@ -74,7 +74,7 @@ export class CartController {
         try {
             const { productId } = req.params
             const { email } = req.body
-            const product = await serviceProduct.getProductById(productId)
+            const product = await serviceProduct.getProducts(productId)
             const cartExist = await service.getCartByEmail(email);
             if (!cartExist){
                 res.json({mensaje: "No se encontro el carrito"})

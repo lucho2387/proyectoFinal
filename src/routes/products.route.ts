@@ -7,15 +7,13 @@ const routerProducts = Router()
 const controller = new ProductosController();
 
 
+routerProducts.get('/:productId?', checkJwt, controller.getProducts)
+
+routerProducts.get('/:categoria/productos', checkJwt,controller.getProductsCategory)
+
 routerProducts.post("/", isAdmin, checkJwt, controller.createProduct);
 
-routerProducts.get("/", controller.getProducts);
-
-routerProducts.get('/:productId', controller.getProductById)
-
 routerProducts.put("/:productId", isAdmin, checkJwt, controller.updateProduct);
-
-routerProducts.get('/:categoria/productos',controller.getProductsCategory)
 
 routerProducts.delete('/:productId', isAdmin, checkJwt, controller.deleteProductById)
 

@@ -5,9 +5,12 @@ import { ProductoDto } from "../dtos/products.dto"
 const productDao = new ProductosDao();
 
 export class ProductosService {
-    async getProducts() {
+
+    constructor() {}
+
+    async getProducts(productId: string) {
         try {
-            return await productDao.getProducts();
+            return await productDao.getProducts(productId);
         } catch (e) {
             return e
         }
@@ -18,18 +21,6 @@ export class ProductosService {
         } catch (e) {
             return e
         }
-    }
-
-    async getProductById(productId: string) {
-        try {
-            return await productDao.getProductById(productId);
-        } catch (e) {
-            return e
-        }
-    }
-
-    async deleteProductById(productId: string) {
-        return await productDao.deleteProductById(productId);
     }
 
     async createProduct(data: any) {
@@ -49,4 +40,9 @@ export class ProductosService {
             return e;
         }
     }
+
+    async deleteProductById(productId: string) {
+        return await productDao.deleteProductById(productId);
+    }
 }
+

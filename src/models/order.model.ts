@@ -3,20 +3,15 @@ import { IOrder } from "../interfaces/orders.interfaces";
 
 const OrderSchema = new Schema<IOrder>({
     email: { type: String, required: true },
-    productos: [
-        {
-            producto: {
-                id: String,
-                nombre: String,
-                descripcion: String,
-                categoria: String,
-                codigo: String,
-                imagen: String,
-                precio: Number,
-            },
-            cantidad: { type: Number },
-        },
-    ],
+    productos: [{
+        _id: false,
+        nombre: String,
+        precio: Number,
+        cantidad: {
+            type: Number,
+            required: true,
+        }
+    }],
     ordenId: { type: Number, required: true },
     estado: { type: String, required: true },
     fyh: { type: String, required: true },

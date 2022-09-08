@@ -32,8 +32,8 @@ app.use(session({
         mongoUrl: config.URL
     }),
     secret: 'secret',
-    resave: false,
-    saveUninitialized: false,
+    resave: true,
+    saveUninitialized: true,
     cookie: {
         maxAge: 6000000
     }

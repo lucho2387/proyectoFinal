@@ -11,6 +11,9 @@ import path from 'path'
 import { routerInfo } from './routes/info.route';
 import { routerUsers } from './routes/users.route';
 import { routerMessages } from './routes/messages.routes';
+import session from  'express-session';
+import cookieParser from "cookie-parser";
+import MongoStore from "connect-mongo";
 
 dbConnect().then()
 const app = express()
@@ -22,6 +25,19 @@ app.set('view engine', 'pug');
 // Middlwares
 app.use(express.json())
 app.use(cors())
+app.use(express.urlencoded({extended: true}))
+app.use(cookieParser())
+app.use(session({
+    store: MongoStore.create({
+        mongoUrl: config.URL
+    }),
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        maxAge: 6000000
+    }
+}))
 
 // Routes
 app.use('/api/products', routerProducts)

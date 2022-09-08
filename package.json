@@ -4,6 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "clean": "rimraf ./dist/",
+    "tsc": "tsc",
+    "build": "npm run clean && tsc",
     "dev": "nodemon ./src/app.ts"
   },
   "keywords": [],
